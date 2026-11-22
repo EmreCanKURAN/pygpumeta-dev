@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://raw.githubusercontent.com/EmreCanKURAN/pygpumeta-dev/main/docs/assets/logo.png" alt="pygpumeta logo" width="420">
+</p>
+
 # pygpumeta
 
 GPU metaheuristics for continuous optimisation with large populations,
