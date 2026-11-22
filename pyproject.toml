@@ -1,0 +1,84 @@
+[build-system]
+requires = ["hatchling>=1.21"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pygpumeta"
+dynamic = ["version"]
+description = "GPU metaheuristics with warp-level selection operators for large-population optimisation"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+authors = [{ name = "Emre Can Kuran" }, { name = "Umut Kuran" }, { name = "Ece Ecemiş" }]
+keywords = ["optimization", "metaheuristics", "gpu", "cuda", "swarm intelligence"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: GPU :: NVIDIA CUDA",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Mathematics",
+    "Typing :: Typed",
+]
+dependencies = ["numpy>=1.23", "pycuda>=2022.1"]
+
+[project.optional-dependencies]
+# CuPy has one package per CUDA major version; pick the one that matches
+# the installed toolkit (docs/installation.md).
+cupy12 = ["cupy-cuda12x>=13"]
+cupy13 = ["cupy-cuda13x>=14"]
+examples = ["scipy>=1.10", "scikit-learn>=1.3"]
+test = ["pytest>=7.4", "pytest-cov>=4.1", "hypothesis>=6.80"]
+dev = ["pygpumeta[test]", "ruff>=0.5", "mypy>=1.8", "pre-commit>=3.5", "build>=1.0"]
+
+[project.urls]
+Repository = "https://github.com/EmreCanKURAN/pygpumeta-dev"
+Issues = "https://github.com/EmreCanKURAN/pygpumeta-dev/issues"
+
+[tool.hatch.version]
+path = "src/pygpumeta/_version.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/pygpumeta"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src", "tests", "README.md", "LICENSE", "CHANGELOG.md"]
+exclude = ["tests/legacy"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["tests"]
+addopts = "-ra --strict-markers"
+markers = ["gpu: needs a CUDA device and PyCUDA; skipped automatically when unavailable"]
+
+[tool.coverage.run]
+source = ["pygpumeta"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+extend-exclude = ["tests/legacy", "tests/stubs", "README.md"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "SIM", "RUF", "D"]
+ignore = ["D105", "D107"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["D"]
+"benchmarks/**" = ["D103"]
+"examples/**" = ["D103", "E501"]
+
+[tool.mypy]
+strict = true
+files = ["src"]
+
+[[tool.mypy.overrides]]
+module = ["pycuda.*", "cupy.*"]
+ignore_missing_imports = true

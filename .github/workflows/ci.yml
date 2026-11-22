@@ -1,0 +1,83 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install ruff mypy numpy
+      - run: ruff check .
+      - run: ruff format --check .
+      - run: mypy
+
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      # PyCUDA has no wheels and cannot be built without the CUDA toolkit,
+      # so the package itself is installed without its dependencies.
+      - run: pip install --no-deps -e .
+      - run: pip install numpy pytest pytest-cov hypothesis scipy scikit-learn
+      - run: python -m pytest -m "not gpu" --cov=pygpumeta --cov-report=term-missing
+
+  test-with-gpu-libraries-importable:
+    # The jobs above run where PyCUDA and CuPy are absent. On a user's
+    # machine they are installed, which changes what "import" does. PyCUDA
+    # cannot be built on a runner without the CUDA toolkit, so importable
+    # stand-ins take the place of both libraries here.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install --no-deps -e .
+      - run: pip install numpy pytest hypothesis scipy scikit-learn
+      - run: python -m pytest
+        env:
+          PYTHONPATH: tests/stubs
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install build twine
+      - run: python -m build
+      - run: twine check dist/*
+      - name: Install the wheel in a clean environment and import it
+        run: |
+          python -m venv /tmp/clean
+          /tmp/clean/bin/pip install numpy
+          /tmp/clean/bin/pip install --no-deps dist/*.whl
+          cd /tmp
+          /tmp/clean/bin/python -c "
+          import sys, pygpumeta, pygpumeta.reference
+          from pygpumeta._backend import source
+          assert 'pycuda' not in sys.modules
+          assert 'sel_tournament_safe' in source.kernel_names(source.selection_source())
+          print(pygpumeta.__version__, pygpumeta.__file__)"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
