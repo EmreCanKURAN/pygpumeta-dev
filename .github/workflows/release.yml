@@ -26,7 +26,7 @@ jobs:
       - name: The version must match the release tag
         if: github.event_name == 'release'
         run: |
-          version=$(python -c "import re; print(re.search(r'\"(.+)\"', open('src/pygpumeta/_version.py').read()).group(1))")
+          version=$(python -c "import re; print(re.search(r'__version__ = \"(.+)\"', open('src/pygpumeta/_version.py').read()).group(1))")
           test "v$version" = "${{ github.event.release.tag_name }}"
       - name: Install the wheel in a clean environment and run the CPU tests
         run: |
