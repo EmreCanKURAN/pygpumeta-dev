@@ -22,7 +22,7 @@ Runtimes exclude kernel compilation, which took 0.3 to 0.4 s per example.
 | 1. Antenna array | GWO native, 2048 x 2000 | sidelobe level -29.68 dB, nulls at -60.4 and -61.3 dB | -30.00 dB without nulls (lower bound) | 4.58 s |
 | 2. Solar cell | DE, 1024 x 3000 | RMSE 9.860219e-4 A | 9.8602e-4 A | 6.80 s |
 | 3. 10-bar truss | DE, 1024 x 3000 | 5060.85 lb, feasible | 5060.85 lb | 10.45 s |
-| 4. Load dispatch | DE, 1024 x 3000 | 17969.49 $/h, demand met exactly | 17963.83 $/h | 9.76 s |
+| 4. Load dispatch | DE, 1024 x 3000 | 17969.49 \$/h, demand met exactly | 17963.83 \$/h | 9.76 s |
 | 5. Image thresholding | PSO with tournament, 1024 x 300 | variance 3940.7894 at thresholds (68, 122, 180) | 3940.7894 at (68, 122, 180), by enumeration | 1.29 s |
 | 6. FIR filter | DE, 2048 x 4000 | ripple 0.05647 (-24.96 dB) | 0.05662 (-24.94 dB), Parks-McClellan | 7.74 s |
 | 7. SVM tuning | GWO with tournament, 32 x 12, host mode | accuracy 0.9789 | 0.9719 with default hyperparameters | 15.22 s |
@@ -67,8 +67,8 @@ inequality constraints on that unit.
 
 The formulation matters. Searching all 13 outputs and penalising the
 mismatch of the power balance, with the same algorithm, 2048 individuals
-and 3000 iterations, reaches only 18525.69 $/h on the T4 and misses the
-demand by 0.024 MW. With the equality removed the result is 17969.49 $/h
+and 3000 iterations, reaches only 18525.69 \$/h on the T4 and misses the
+demand by 0.024 MW. With the equality removed the result is 17969.49 \$/h
 with the demand met exactly, 5.66 $/h above the best value known.
 
 ## 5. Multilevel image thresholding
