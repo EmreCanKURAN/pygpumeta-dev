@@ -39,7 +39,7 @@ arrays; you do not write CUDA code.
 
 An NVIDIA GPU, the CUDA toolkit, a C++ compiler and PyCUDA are required;
 CuPy is needed for objectives written as Python functions on GPU arrays.
-[docs/installation.md](docs/installation.md) has step-by-step instructions
+[docs/installation.md](https://github.com/EmreCanKURAN/pygpumeta-dev/blob/main/docs/installation.md) has step-by-step instructions
 for Google Colab, Linux with conda-forge and Windows. Afterwards,
 
 ```
@@ -80,13 +80,13 @@ print(result.values, result.feasible)
 
 ## Documentation
 
-- [Which objective mode should I use?](docs/objective_modes.md), with
+- [Which objective mode should I use?](https://github.com/EmreCanKURAN/pygpumeta-dev/blob/main/docs/objective_modes.md), with
   measured timings of one problem in each mode.
-- [The selection operators](docs/selection.md): what they do and what they
+- [The selection operators](https://github.com/EmreCanKURAN/pygpumeta-dev/blob/main/docs/selection.md): what they do and what they
   do not provide.
-- [Adding an algorithm](docs/adding_an_algorithm.md).
-- [Installation](docs/installation.md).
-- [Examples](docs/examples.md) with their results: antenna array synthesis,
+- [Adding an algorithm](https://github.com/EmreCanKURAN/pygpumeta-dev/blob/main/docs/adding_an_algorithm.md).
+- [Installation](https://github.com/EmreCanKURAN/pygpumeta-dev/blob/main/docs/installation.md).
+- [Examples](https://github.com/EmreCanKURAN/pygpumeta-dev/blob/main/docs/examples.md) with their results: antenna array synthesis,
   solar cell parameter extraction, truss sizing, economic load dispatch,
   image thresholding, FIR filter design, SVM tuning and a custom algorithm.
 
@@ -127,7 +127,7 @@ operators:
              Ballot-Elite Mechanisms for {GPU}-Accelerated Metaheuristics},
   journal = {Swarm and Evolutionary Computation},
   year    = {2026},
-  note    = {In press}
+  doi     = {10.1016/j.swevo.2026.102633}
 }
 ```
 

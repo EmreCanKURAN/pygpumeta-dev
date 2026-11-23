@@ -1,0 +1,32 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the paper below."
+title: "pygpumeta: GPU metaheuristics with warp-level selection operators"
+type: software
+license: MIT
+repository-code: "https://github.com/EmreCanKURAN/pygpumeta-dev"
+authors:
+  - family-names: Kuran
+    given-names: Emre Can
+    orcid: "https://orcid.org/0000-0002-0987-3866"
+  - family-names: Kuran
+    given-names: Umut
+    orcid: "https://orcid.org/0000-0001-5508-1870"
+  - family-names: Ecemiş
+    given-names: Ece
+    orcid: "https://orcid.org/0009-0002-8214-4499"
+preferred-citation:
+  type: article
+  title: "Register-Level Selection via Warp Primitives: Shuffle-Based Tournament and Ballot-Elite Mechanisms for GPU-Accelerated Metaheuristics"
+  authors:
+    - family-names: Kuran
+      given-names: Emre Can
+      orcid: "https://orcid.org/0000-0002-0987-3866"
+    - family-names: Kuran
+      given-names: Umut
+      orcid: "https://orcid.org/0000-0001-5508-1870"
+    - family-names: Ecemiş
+      given-names: Ece
+      orcid: "https://orcid.org/0009-0002-8214-4499"
+  journal: "Swarm and Evolutionary Computation"
+  year: 2026
+  doi: "10.1016/j.swevo.2026.102633"

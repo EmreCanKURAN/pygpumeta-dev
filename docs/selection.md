@@ -8,6 +8,7 @@ the global best. They are described in
 > E. C. Kuran, U. Kuran, E. Ecemiş, "Register-Level Selection via Warp
 > Primitives: Shuffle-Based Tournament and Ballot-Elite Mechanisms for
 > GPU-Accelerated Metaheuristics," Swarm and Evolutionary Computation, 2026.
+> https://doi.org/10.1016/j.swevo.2026.102633
 
 | Operator | In `minimize` | Standalone | What an individual receives |
 | --- | --- | --- | --- |

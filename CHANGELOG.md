@@ -6,6 +6,17 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-11-23
+
+### Changed
+
+- Citation updated with the DOI of the paper.
+- Project logo, `CITATION.cff` and a link to the paper added.
+
+### Fixed
+
+- Links to the documentation in the README work on PyPI.
+
 ## [0.1.0] - 2026-11-22
 
 ### Added
